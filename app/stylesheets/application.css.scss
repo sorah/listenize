@@ -1,0 +1,30 @@
+body {
+  text-align: center;
+  font-family: 'Helvetica Neue Light', sans-serif;
+}
+
+.container {
+  width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+#control {
+  .volume {
+    float: right;
+  }
+
+  .play { display: none; }
+}
+
+.channel {
+  .right {
+    float: right;
+  }
+  .play, .clear { display: none; }
+}
+
+#template {
+  display: none;
+}

@@ -1,0 +1,9 @@
+{
+  "name": "timbre",
+  "version": "0.0.0",
+  "commit": "83b23a7a3434f99b40abe843a2f4dc1bbd6a1d10",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mohayonao/timbre.git"
+  }
+}

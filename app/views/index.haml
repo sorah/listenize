@@ -1,0 +1,28 @@
+!!! 5
+%html
+  %head
+    %meta{charset: 'UTF-8'}
+    %link{rel: 'stylesheet', href: '/assets/application.css'}
+    %script{src: '/assets/jquery/jquery.min.js'}
+    %script{src: '/assets/mustache/mustache.js'}
+    %script{src: '/assets/timbre/timbre.min.js'}
+    %script{src: '/assets/application.js'}
+    %title Listenize
+  %body
+    .container
+      %header#control
+        %span.play ▶
+        %span.stop ■
+        %input.volume{type: 'range', min: 0, max: 100, step: 1, value: 100}
+      %section#channels
+
+    #template
+      .channel{id: "ch_{{name}}"}
+        %span.name {{name}}
+        .right
+          %span.note
+          %span.control{style: 'display: none'}
+            %span.clear X
+            %span.play ▶
+            %span.stop ■
+            %input.volume{type: 'range', min: 0, max: 100, step: 1, value: 100}

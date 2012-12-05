@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+require 'rack'
+require 'listenize'
+require 'optparse'
+
+app = Rack::Builder.app do
+  map '/assets' do
+    run Listenize::App.sprockets
+  end
+
+  map '/' do
+    run Listenize::App
+  end
+end
+
+options = {
+  server: :thin,
+  environment: :development,
+  Port: 8959,
+  app: app
+}
+OptionParser.new do |op|
+  op.on('-p port', 'Port (Default: 8959)')               { |val| options[:Port] = Integer(val) }
+  op.on('-o addr', 'Address to bind (Default: 0.0.0.0)') { |val| options[:Host] = val }
+  op.on('-d', 'daemonize') { options[:daemonize] = true }
+end.parse!(ARGV.dup)
+
+Rack::Server.start options
+# Listenize::App.run!(options)
+
