@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+require 'listenize'
+
+exit Listenize::CLI.run(ARGV)

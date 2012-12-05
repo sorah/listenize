@@ -34,6 +34,7 @@ jQuery ($) ->
     if playing[payload.channel] && (payload.stop || !(playing[payload.channel].time))
       playing[payload.channel].timbre.pause()
       playing[payload.channel] = null
+      return if payload.stop
 
     if playing[payload.channel]
       queue[payload.channel].push(payload)
