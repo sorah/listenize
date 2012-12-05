@@ -21,16 +21,16 @@ module Listenize
         return 0
       end
 
-      if @options[:stdin]
+      if @options[:chars]
         queue = Queue.new
         th = Thread.new() do
-          while i = queue.pop
-            send(channel: @options[:channel], time: @options[:time], t: [*@argv, i])
+          while is = queue.pop
+            send(is.map { |i| {channel: @options[:channel], time: @options[:time], t: [*@argv, i]} })
           end
         end
-        while c = $stdin.getc
-          print c if @options[:tee]
-          queue.push(c.ord * 10)
+        while l = $stdin.gets
+          puts l if @options[:tee]
+          queue.push(l.chars.map{ |c| c.ord * 10 })
         end
         queue.push(nil)
         th.join
@@ -69,11 +69,11 @@ module Listenize
           options[:stop] = true
         end
 
-        op.on('--stdin', 'Listenize STDIN') do
-          options[:stdin] = true
+        op.on('--chars', 'Listenize STDIN, sound will be hear per line') do
+          options[:chars] = true
         end
 
-        op.on('--tee', 'When --stdin, puts read chars into stdout') do
+        op.on('--tee', 'When --chars, puts read lines into stdout') do
           options[:tee] = true
         end
       end.parse!(@argv)
